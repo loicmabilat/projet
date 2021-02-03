@@ -1,0 +1,85 @@
+html
+{
+    background-color:#fffff3;
+}
+.menuenregistrement
+{
+    display : flex;
+    align-items: center;
+    justify-content : space-around;
+    flex-direction: column;
+    height : 80%;
+    width : 70%;
+    position :absolute;
+    left : 15%;
+    font-size : 1.4em;
+}
+.inscription,.connection
+{
+    display : flex;
+    align-items: center;
+    flex-direction: column;
+    position :relative;
+    width: 50%;
+    height : 60px;
+    margin : auto;
+    padding : auto;
+    border : solid rgb(100, 110, 10);
+    border-radius: 30px 30px 30px 30px;
+}
+.identifiant,.mdp
+{
+    display : flex;
+    align-items: center;
+    flex-direction: column;
+    position :relative;
+    width: 70%;
+    height : 100px;
+    margin : auto;
+    padding : auto;
+    border : solid rgb(100, 110, 10);
+    border-radius: 30px 30px 30px 30px;
+}
+.nouvelinscrit
+{
+    display : flex;
+    position : absolute;
+    width : 360px;
+    left : 20%;
+    height : 25px ;
+    top : 85% ;
+    border : solid black;
+    justify-content: center;
+}
+
+.resiliation
+{
+    display : flex;
+    position : absolute;
+    width : 240px;
+    left : 20%;
+    height : 25px ;
+    top : 90% ;
+    border : solid black;
+    justify-content: center;
+}
+.pubg
+{
+    display : flex;
+    position : absolute;
+    width : 14%;
+    left : 0%;
+    height : 800px ;
+    top : 5% ;
+    border : solid black;
+}
+.pubd
+{
+    display : flex;
+    position : absolute;
+    width : 14%;
+    right : 0%;
+    height : 800px ;
+    top : 5% ;
+    border : solid black;
+}

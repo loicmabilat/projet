@@ -1,0 +1,23 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loicmabilat/projet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loicmabilat/projet/issues"
+  },
+  "homepage": "https://github.com/loicmabilat/projet#readme",
+  "devDependencies": {
+    "cypress": "^6.3.0",
+    "netlify-plugin-cypress": "^1.4.1"
+  }
+}
