@@ -1,37 +1,121 @@
 html,body
 {
-    background-color:#ffffff;
+    background-color:#fbfae6;
+}
+a{
+    text-decoration : none;
 }
 .menuabonnement
 {
     display : flex;
-    align-items: center;
-    justify-content : space-around;
-    flex-direction: column;
-    height : 90%;
-    width : 70%;
     position :absolute;
-    left : 10%;
+    align-items: center;
+    flex-direction: column;
+    top : 50px;
+    height : 800px;
+    width : 70%;
+    cursor :pointer;
+    left : 12%;
     font-size : 1.4em;
+    background-color :rgb(255, 255, 255);
+    border : 2mm ridge blue;
 }
-
+.intro
+{
+    display: flex;
+}
 .pubg
 {
     display : flex;
     position : absolute;
-    width : 14%;
+    width : 10%;
     left : 0%;
     height : 600px ;
-    top : 5% ;
+    top : 15% ;
     border : solid black;
 }
 .pubd
 {
     display : flex;
     position : absolute;
-    width : 14%;
+    width : 10%;
     right : 0%;
     height : 600px ;
     top : 5% ;
     border : solid black;
 }
+
+
+.dates
+{
+    display:flex;
+    position : absolute;
+    flex-direction : column;
+    top : 700px ;
+    right : 5%;
+    width : 80% ;
+    height : 50px ;
+    border : solid rgb(0, 4, 255) ;
+}
+
+#menu-sd
+{
+    display :flex;
+    position :absolute;
+    top : 5.5em;
+    left :84%;
+cursor :pointer;
+}
+
+#menu-sd .bar1
+{display :flex ;
+    position : absolute ;
+    top : 20px;
+    width:32px; height:5px; transition : 4s;
+    background-color : rgb(24, 202, 0);
+}
+
+#menu-sd.clicked .bar1 
+{
+    transform: translate(30px, 0px) ;
+    
+}
+
+#menu
+    { 
+        position :fixed;
+        width:60%;box-shadow:1px 0 1px #fb887c;z-index: 999;
+     color:rgb(160, 0, 0); text-decoration: underline dotted rgb(90, 0, 75) ;
+    font-weight:700; background:#c8e0f8;
+    transition:background .5s; padding:4em 2em;
+    text-align:center; margin-bottom: .5em;
+    box-shadow:1px 1px 0 #666;min-height : 45%;
+    font-size : 1.2rem;border-radius : 10px;
+}
+    #menu:hover 
+    {background:#94ffff;
+    text-decoration: none ;color : #a10202;
+    transition:background .5s;
+}
+    #menu.visible {animation:.5s slideRight ease-in forwards;
+    transition-delay:0;}
+    #menu.invisible {animation:1s slideLeft ease-out forwards;
+transition-delay:0;}
+    
+/* Animations pour le menu slide */
+    @keyframes slideRight {
+        from {left:-80%;}
+        to {left:15%;}
+    }
+    @-webkit-keyframes slideRight {
+        from {left:-80%;}
+        to {left:22%;}
+    }
+    @keyframes slideLeft {
+        from {left:22%;}
+        to {left:-80%;}
+    }
+    @-webkit-keyframes slideLeft {
+        from {left:22%;}
+        to {left:-80%;}
+    }
