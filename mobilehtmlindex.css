@@ -3,29 +3,36 @@ html, body{
     padding: 0;
     margin :0;
     box-sizing : border-box;
-    background-image: url(image/fond1.jpg);
 }
 
 .header
 {
 
 }
-.menu
+.accueil
 {
     display: flex;
     position : absolute;
-    flex-direction : column;
-    top : 80px;
-    left : 30%;
-    font-size : 3rem;
-    background-color : white;
-    border-radius : 0px 0px 50px 50px;
-    height : 240px;
-    width : 40%;
-    text-align : center;
-
+    left : 46% ;
+    top : 10px;
+    font-size : 1.8em;
 }
-
+.panier
+{
+    display : flex;
+    position : absolute;
+    left :46%;
+    top : 100px;
+    font-size : 2.0em;
+}
+.abonnement
+{
+    display : flex;
+    position : absolute;
+    left : 46%;
+    top : 160px;
+    font-size : 2.0em;
+}
 .langue
 {
     display : flex;
@@ -34,80 +41,70 @@ html, body{
     top :2px ;
     left : 2%;
     width : 300px;
-    font-size : 2.5em;
-    background-color :initial;
+    height : 17%;
+    font-size : 2em;
+    
 }
 .connexion
 {
     display :flex ;
-    position : absolute;
+    position :absolute;
     width: 100%;
-    margin : auto;
-    
-    top :370px ;
-    left : 6%;
+    top :280px ;
+    left : 9%;
     justify-content : center;
-    font-size : 3rem;
-    background-color : rgb(238, 238, 253);
-    opacity : 1;
-visibility : visible;
+    font-size : 4em;
 }
 
 .inscription
 {
     display :flex ;
     position :absolute ;
-    height: 50px;
-    padding : 10px;
-    border-radius : 10px;
     width : 100%;
-    top : 450px ;
-    left : 5%;
-    font-size : 3rem;
-    opacity : 1;
-visibility : visible;
+    top : 370px ;
+    left : 7%;
+    font-size : 3.5em;
+}
+
+.menu
+{
+    display :flex ;
+    position :absolute;
+    width: 30%;
+    top :20px ;
+    left : 30%;
+    font-size : 2em;
 }
 
 .ecrit
 {
     display :flex;
     position: absolute;
-    height : 800px ;
-    left : 0%;
-    top : 15%;
-    justify-content:space-between;
-    flex-direction : column ;
+
+    font-size : 2em;
+    font-style : italic;
+    font-family : serif;
+    font-weight: bold;
 }
 
 .presentation
 {
     display :flex ;
-    width: 900px;
-    height: 180px;
-    margin : auto;
     position :absolute;
-    top : 280px;
+    top : 450px;
     left : 200px;
-    text-align: center;
-    font-size : 3em;
-    font-style : italic;
-    color  :#2a00fa;
+width : 900px;
 }
 
 .principe
 {
     display :flex ;
     position :absolute;
-    width: 800px;
-    height: 550px;
-    top : 450px;
-    left : 100px;
-    text-align: center;
-    font-size : 2.5em;
-    font-family : serif;
-    font-style : italic;
-    font-weight: bold;
-    color : #024e2d;
+    width: 900px ;
+    height: 250px;
+    top : 600px;
+    left : 200px;
+
 }
 .titrepanier
 {
@@ -132,7 +129,7 @@ visibility : visible;
 {
     display : flex;
     position : absolute;
-    top :1185px ;
+    top :800px ;
     width : 100% ;
     left : 6%;
     font-size : 1.8em;
@@ -140,7 +137,6 @@ visibility : visible;
     margin :auto;
     height : 900px;
     border : solid rgb(0, 0, 0);
-    border-radius : 200px 200px 0px 0px;
     
 }
 
@@ -148,13 +144,12 @@ footer
 {
 display : flex ;
 position: absolute;
-top : 2150px ;
+top : 1740px ;
 left: 34%;
 width :50% ;
 height: 150px;
 font-size : 1.8em;
-border : solid rgb(255, 195, 195);
-border-radius : 20px;
+border : solid maroon;
 text-align : center;
 }
 
@@ -164,8 +159,3 @@ text-align : center;
     justify-content: center;
 }
 
-.barreseparation
-{display : flex;
-    visibility :hidden;
-    width : 1px;
-}

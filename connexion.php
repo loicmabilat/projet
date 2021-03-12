@@ -1,0 +1,81 @@
+<?php
+session_start();
+
+$bdd = new PDO('mysql:host=localhost;dbname=membres;charset=utf8', 'root', 'root');
+
+if(isset($_POST['soummettre']))
+{
+        $emailconnect=htmlspecialchars($_POST['emailconnect']);
+        $mdpconnect = sha1($_POST['mdpconnect']);
+        if(!empty($emailconnect) AND !empty($mdpconnect))
+        {
+                $requser =$bdd->prepare("SELECT * FROM users WHERE email = ? AND mdp = ? ");
+                $requser->execute(array($emailconnect, $mdpconnect));
+                $userexist = $requser->rowCount();
+                if($userexist == 1)
+                {
+                        $_SESSION['loic'] = TRUE;
+
+                        $userinfo = $requser->fetch();
+                        $_SESSION['id'] = $userinfo['id'];
+                        $_SESSION['nom'] = $userinfo['nom'];
+                        $_SESSION['prenom'] = $userinfo['prenom'];
+                        $_SESSION['email'] = $userinfo['email'];
+                        $_SESSION['telephone'] = $userinfo['telephone'];
+                        //header("Location: index.php?id=".$_SESSION['id']);
+                        header("Location: index.php");
+                        
+                }
+                else
+                {
+                        $erreur =" mauvais mail ou mot de passe";
+                }
+        }
+        else
+        {
+                $erreur = "Tous les champs doivent être complétés !" ;
+        }
+}
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset = "utf_8" />
+    <title> connexion</title>
+    <link rel="stylesheet" href="connexionanime.css" />
+    <link rel="stylesheet" media="screen and (max-width:1000px)" 
+    href="mobileconnexion.css" />
+    
+    </head>
+
+<body>
+<div class="retour">
+
+<a href="index.html">retour à l'accueil</a>
+</div>
+<div class="connexion">
+    
+        <h1>CONNEXION</h1>
+        <form method="POST" action="connexion.php">
+        <h1>email de connexion</h1>
+        <input type="mail" class="mail" name="emailconnect" placeholder="email" />
+        <h1>mot de passe</h1>
+        <input type="password" class="password" name="mdpconnect" />
+        <input type="submit" class="submit" name="soummettre" value="Se connecter" />
+        
+        </form>
+        <div class="recup">
+        <a href="recuperation.php"><b> récupération du mot de passe</b></a>
+        </div>
+        <div class="message">
+        <?php 
+        if(isset($erreur))
+        {
+                echo '<font color="red">' .$erreur. "</font>";
+        }
+        ?>
+        </div>
+</div> 
+</body>
+</html>

@@ -1,0 +1,273 @@
+<?php
+session_start();
+if (!isset($_SESSION['loic']) || !$_SESSION['loic']) {
+        header('Location: connexion.php');
+        }
+$bdd = new PDO('mysql:host=localhost;dbname=membres;charset=utf8', 'root', 'root');
+if(isset($_SESSION['loic']))
+{
+        
+$getid = intval($_SESSION['id']);
+$requser = $bdd->prepare('SELECT * FROM users WHERE id =? ');
+$requser->execute(array($getid));
+$userinfo = $requser->fetch();
+        if(isset($_POST['enregistrer']))
+        {
+                $nom = htmlspecialchars($_POST['nom']);
+                $email = htmlspecialchars($_POST['email']);
+                $adresse = htmlspecialchars($_POST['adresse']);
+                $telephone = htmlspecialchars($_POST['telephone']);
+                $nomlength = strlen($nom);
+                if(is_numeric($telephone))
+                {
+                if(!empty($_POST['nom']) AND !empty($_POST['adresse'])
+                AND !empty($_POST['telephone']) AND !empty($_POST['email']))
+                        {
+                                $insertadresse = $bdd->prepare("INSERT INTO adresse(nom, adresse, telephone, email, id_users) VALUES(?, ?, ?, ?, ?)");
+                                $insertadresse->execute(array($nom, $adresse, $telephone, $email, $getid));
+                                if($nomlength <= 60)
+                                        {
+                                        $creer = "votre adresse a été créer !";
+                                        echo "veuillez cliquer sur retour à l\'accueil s\il vous plait";
+                                        }
+                                else
+                                        {
+                                        $erreur = "ne mettez pas plus de 60 caractères a votre nom et prenom !";
+                                        }
+                        }
+                        else
+                {
+                $erreur = "tous les champs doivent être remplies";
+                }
+                }else 
+                {
+                $erreur =  "mettre des chiffres pour le téléphone";
+                }
+        }
+
+
+?>
+<!DOCTYPE html>
+<html>
+        <head>
+        <meta charset = "utf_8" />
+        <title>abonnement</title>
+        <link rel="stylesheet" href="abonnement.css">
+        <link rel="stylesheet" media="screen and (max-width:1000px)"
+        href="mobileabonnement.css"/>
+        </head>
+
+
+<body>
+        Profil de : <?php echo $_SESSION['nom']?></br>
+        <div class="retour">
+        <a href="index.php"><h3>retour à l'accueil</h3></a>
+        </div></br>
+
+<div id="menu-sd">
+        <div class="bar1">
+                >>>> votre récapitulatif <<<<
+        </div>
+</div>
+
+<div id="menu">
+     <?php 
+     $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
+     $reqpanier->execute(array($getid));
+     $panierinfo = $reqpanier->fetch();
+     $_SESSION['panier'] = $panierinfo['composition'];
+ 
+     $reqabonnement = $bdd->prepare('SELECT * FROM dates WHERE id_users =?');
+     $reqabonnement->execute(array($getid));
+     $dateinfo = $reqabonnement->fetch();
+     $datedebut = $dateinfo['datedebut'];
+     $datefin = $dateinfo['datefin'];
+     
+     $reqadresse = $bdd->prepare('SELECT * FROM adresse WHERE id_users=? ');
+     $reqadresse->execute(array($getid));
+     $adresseinfo = $reqadresse->fetch();
+     $adresse = $adresseinfo['adresse'];
+ 
+     
+     echo "Numero de client : " .$getid . "<br />\n";
+     echo "Profil de : " . $_SESSION['nom'] . "<br />\n";
+     echo "prénom : " . $_SESSION['prenom']  . "<br />\n";
+     echo "Courriel : " . $_SESSION['email']  ."<br />\n";
+     echo "votre téléphone est le : " . $_SESSION['telephone'] . "<br />\n";
+     echo "choix du panier : " . $_SESSION['panier'] ."<br />\n";
+     echo "abonnement annuel souscrit : " . $datedebut  . "<br />\n";
+     echo "abonnement se finit le : " . $datefin  . "<br />\n";
+     echo " livré à l'adresse suivant : " . $adresse  . "<br />\n";
+    
+    ?>
+</div>
+<div class="pubg">
+        publicité gauche
+        </div>
+        <div class="pubd">
+        publicité droite
+        </div>
+        
+
+<div class="menuabonnement">
+
+        <div class="intro">
+        Votre dossier d'abonnement annuel pour le membre N° :
+        <?php echo $getid ?>
+        </div></br>
+
+        <form method="post" action="">
+        <p>
+                <label for="nom">quel Nom et prénom pour la livraison ?</label>
+                <input type="text" name="nom" id="nom" size="70"
+        maxlength="60" value="<?php if(isset($nom)) {echo $nom;} ?>"/>
+        </p>
+        <p>
+                <label for="adresse">Quel est votre adresse ?</label></br>
+                <input type="textarea" name="adresse" id="adresse" size="80" 
+                maxlength="90" value="<?php if(isset($adresse)) {echo $adresse;} ?>"/></br>
+                <textarea name="adresse" id="adresse" cols="80" rows="2"></textarea>
+        </p>
+                <p>
+                <label for="telephone">Téléphone fixe ou portable ?</label>
+                <input type="tel" name="telephone" id="tel" size="8" 
+                maxlength="10" value="<?php if(isset($telephone)) {echo $telephone;} ?>"/>
+                </p>
+        <p>
+                <label for="email">Quel est votre email ?</label>
+                <input type="mail" name="email" id="email" size="50"
+                maxlength="50" value="<?php if(isset($email)) {echo $email;} ?>"/>
+        </p>
+        <div class="animation">
+        <div class="btn">
+        <input type="submit"  name="enregistrer" value="enregistrer l'adresse" />
+</div>
+        <div class="alerte">
+<!--suite de l'enregistrement :
+        <?php if(isset($erreur))
+                {
+                        echo '<font color="red">' .$erreur. "</font>";
+
+                }
+                if(isset($creer))
+                {
+                        echo '<font color="green">' .$creer. "</font>";
+                }
+        ?>
+        </div>
+        </div>
+</form>
+
+</br>
+
+<div class="panierchoisie">
+        
+        
+                <a>Fréquence de livraison du panier choisis: 1 par semaine.</a>
+</div>
+        <div class="abonnementprit">
+        <form method="post" action="">
+        
+                <p>
+                        <label for="choixmois">Abonnement choisie soit au mois</label>
+                        <select id="choixmois" name="choixmois" >
+                        <option value="janvier">janvier</option>
+                        <option value="fevrier">fevrier</option>
+                        <option value="mars">mars</option>
+                        <option value="avril">avril</option>
+                        <option value="mai">mai</option>
+                        <option value="juin">juin</option>
+                        <option value="juillet">juillet</option>
+                        <option value="aout">aout</option>
+                        <option value="septembre">septembre</option>
+                        <option value="octobre">octobre</option>
+                        <option value="novembre">novembre</option>
+                        <option value="decembre">decembre</option>
+                        </select>
+                </p>ENUM ETE HIVER ANNE
+                <p>
+                        <label for="choixsaison">Abonnement choisie soit à l'annee</label>
+                        <input type="radio" id="choixannee" name="choixsaison" />
+                        <a></a>
+                </p>
+        
+        <p>
+                <label for="choixsaison">Abonnement choisie soit en été</label>
+                <input type="radio" id="choixete" name="choixsaison" />
+                <h5>1er semaine de juin à fin septembre</h5>
+        </p>
+        <p>
+                <label for="choixsaison">Abonnement choisie soit en hiver</label>
+                <input type="radio" id="choixhiver" name="choixsaison" />
+                <h5>1er semaine de décembre à fin mars</h5>
+        </p>-->
+        </form>
+        </div>
+        <div class="date"><c>le jour de votre abonnement :</c>
+          <?php 
+                $datedebut = date('d /m /Y');
+                echo '<font color="black">' .$datedebut. "</font>";
+          ?>
+          <c>...jusqu'au :</c>
+        <?php 
+                $datefin = date('d /m /Y',strtotime('+1 year'));
+                echo '<font color="black">' .$datefin. "</font>";
+        if(isset($_POST['enregistrer']))
+        {
+        $insertadresse->execute(array($nom, $adresse, $telephone, $email, $getid));
+        $insertdate = $bdd->prepare("INSERT INTO dates(datedebut, datefin, id_users) VALUES(? , ?, ?)");
+        $insertdate->execute(array($datedebut, $datefin , $getid));
+        }
+        ?>
+        </div>
+                <div class="accordcvg">
+        <a href="accordcgv.pdf">Accord contrat Général de Vente .CGV</a>
+        
+        </div></br>
+
+        <button>\==payer la commande par paypal ou cb ==/</button></br>
+
+<div id="smart-button-container">
+        <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+</div>
+</div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+function initPayPalButton() {
+paypal.Buttons({
+        style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'paypal',
+        },
+
+        createOrder: function(data, actions) {
+        return actions.order.create({
+        purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
+        });
+        },
+
+        onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+        });
+        },
+
+        onError: function(err) {
+        console.log(err);
+        }
+        }).render('#paypal-button-container');
+}
+        initPayPalButton();
+ </script>
+</div> <!--fin de div page <script src="abonnement.js"></script> entiere-->
+
+
+        <script src="sandwich.js"></script>
+</body>
+</html>
+<?php
+}
+?>

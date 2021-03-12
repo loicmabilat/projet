@@ -11,20 +11,11 @@ $requser = $bdd->prepare('SELECT * FROM users WHERE id =? ');
 $requser->execute(array($getid));
 $userinfo = $requser->fetch();
 $reqad =$bdd->prepare("SELECT * FROM adresse WHERE id_users=?");
-$reqad->execute(array($getid));
-$reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
-     $reqpanier->execute(array($getid));
-     $panierinfo = $reqpanier->fetch();
-     @$_SESSION['panier'] = $panierinfo['composition'];
-     $reqadresse = $bdd->prepare('SELECT * FROM adresse WHERE id_users =?');
-     $reqadresse->execute(array($getid));
-     $adresseinfo = $reqadresse->fetch();
-     @$_SESSION['adresse'] = $adresseinfo['adresse'] ;
-        $adresseexist = $reqad->rowCount();
-        if($adresseexist !== 1)
-        {
+                $reqad->execute(array($getid));
+                $adresseexist = $reqad->rowCount();
+                if($adresseexist !== 1){
         if(isset($_POST['enregistrer']))
-                {
+        {
                 $nomlivraison = htmlspecialchars($_POST['nom']);
                 $email = htmlspecialchars($_POST['email']);
                 $adresse = htmlspecialchars($_POST['adresse']);
@@ -39,11 +30,8 @@ $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
                                 $insertadresse->execute(array($nomlivraison, $adresse, $telephone, $email, $getid));
                                 if($nomlength <= 60)
                                         {
-                                        $creer = "adresse et panier présents";
+                                        $creer = "votre adresse a été créer !";
                                         echo "veuillez cliquer sur retour à l'accueil s'il vous plait";
-                                        $delai = 1; 
-                                        $url = 'http://localhost:81/projet/abonnement.php';
-                                        header("Refresh: $delai;url=$url");
                                         }
                                 else
                                         {
@@ -59,9 +47,7 @@ $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
                 $erreur =  "mettre des chiffres pour le téléphone";
                 }
         }
-
-        }else{$erreur =" vous avez deja une adresse !";
-        echo "";}
+}else{$erreur =" vous avez deja une adresse !";}
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,7 +63,11 @@ $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
         <div class="retour">
         <a href="index.php"><h3>retour à l'accueil</h3></a>
         </div></br>
-
+<div id="menu-sd">
+        <div class="bar1">
+                <<<<  votre récapitulatif >>>>
+        </div>
+</div>
 <div class="pubg">
         publicité gauche
         </div>
@@ -133,7 +123,6 @@ $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
                         echo '<font color="green">' .$creer. "</font>";
                 }
         ?>
-             
         </div>
         <div class="accordcvg">
         <a href="accordcgv.pdf">Accord contrat Général de Vente .CGV</a>
@@ -144,16 +133,15 @@ $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
            </div>
         </form>
         <button>\==payer la commande par paypal ou cb ==/</button></br>
-
- <div id="smart-button-container">
+<div id="smart-button-container">
         <div style="text-align: center;">
         <div id="paypal-button-container"></div>
-        </div>
- </div>
+</div>
+</div>
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
 function initPayPalButton() {
-  paypal.Buttons({
+paypal.Buttons({
         style: {
         shape: 'rect',
         color: 'gold',
@@ -177,19 +165,20 @@ function initPayPalButton() {
         console.log(err);
         }
         }).render('#paypal-button-container');
- }
+}
         initPayPalButton();
  </script>
 </div> <!--fin de div page <script src="abonnement.js"></script> entiere-->
-</form>
-<div id="menu-sd">
-        <div class="bar1">
-                <<<<  votre récapitulatif >>>>
-        </div>
-</div>
 <div id="menu">
-  <?php 
-     
+     <?php 
+     $reqpanier = $bdd->prepare('SELECT * FROM panier WHERE id_users =? ');
+     $reqpanier->execute(array($getid));
+     $panierinfo = $reqpanier->fetch();
+     $_SESSION['panier'] = $panierinfo['composition'];
+     $reqadresse = $bdd->prepare('SELECT * FROM adresse WHERE id_users =?');
+     $reqadresse->execute(array($getid));
+     $adresseinfo = $reqadresse->fetch();
+     $_SESSION['adresse'] = $adresseinfo['adresse'] ;
      echo "Numero de client : " .$getid . "<br />\n";
      echo "Profil de : " . $_SESSION['nom'] . "<br />\n";
      echo "prénom : " . $_SESSION['prenom']  . "<br />\n";
@@ -199,9 +188,7 @@ function initPayPalButton() {
      echo "abonnement annuel souscrit : " . $datedebut  . "<br />\n";
      echo "abonnement se finit le : " . $datefin  . "<br />\n";
      echo " livré à l'adresse suivant : " . $_SESSION['adresse']  . "<br />\n";
-     
      ?>
-
      </div>
   <script src="sandwich.js"></script>
   </body>

@@ -15,11 +15,8 @@ if(isset($_POST['ajouter']))
 
     $ch=$_POST["ch"];
     $valider=$_POST['ajouter'];
-    $insertpanier=$bdd->prepare("INSERT INTO panier(composition, id_users) VALUE(?, ?)");
-    $insertpanier->execute(array(implode("|",$ch), $getid));
-    $panierinfo = $insertpanier->fetch();
-
-    
+    $insertpanier=$bdd->prepare("INSERT INTO panier(composition) VALUE(?)");
+    $insertpanier->execute(array(implode("|",$ch)));
 }
 ?>
 <!DOCTYPE html>
@@ -34,7 +31,7 @@ if(isset($_POST['ajouter']))
 <body>
 <div class="retour">
     <a href="index.php">retour à l'accueil</a><br />
-    Profil de : <?php echo $_SESSION['nom']?>
+    / Profil de : <?php echo $_SESSION['nom']?>
 </div>
 
 <div class="colonne">
@@ -58,7 +55,7 @@ if(isset($_POST['ajouter']))
 
     <div class="colonne2">
         <div class="choix">
-            choix d'un seul panier, </br>petit ou grand
+            choix des paniers </br>petit ou grand
         </div>
         
         <div class="nombrepanier1">
@@ -95,7 +92,7 @@ if(isset($_POST['ajouter']))
         </div>
 
         <div class="totalpanier">
-            <a>le panier que '</a></br><a>-' vous avez choisie : </a>
+            <a>nombre de panier total 1 maximum '</a></br><a>-' vous avez choisie : </a>
             <?php   
         
         if(isset($valider))

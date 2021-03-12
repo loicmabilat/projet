@@ -1,0 +1,144 @@
+html,body
+{
+    background-color:#ffffff;
+}
+
+.retour
+{
+display : flex ;
+position : relative;
+justify-content:center;
+font-size: 1.8em;
+}
+
+.colonne1
+{
+    display : none;
+}
+
+.colonne11
+{
+    display : flex;
+    position :absolute;
+    align-items: center;
+    justify-content : space-around;
+    flex-direction: column;
+    height : 1500px;
+    width : 300px;
+    top : 150px;
+    left : 5%;
+    font-size : 2.2em;
+    background-color :rgb(255, 255, 255);
+}
+.colonne2
+{
+    display : flex;
+  border : none ;
+  left : 500px;
+  top : 1px;
+  
+}
+.choix
+{
+    display : flex;
+    position : relative;
+    top: 100px;
+    left : 1%;
+    font-size : 2.5rem;
+}
+.nombrepanier1
+{
+    display : flex;
+    position : relative;
+    
+    left: 50%;
+    font-size: 3rem;
+    top : 100px;
+}
+.nombrepanier2
+{
+    display : flex;
+    position : relative ;
+    
+    left : 50%;
+    font-size : 3rem ;
+    top : 250px;
+}
+.nombrepanier3
+{
+    display : flex;
+    position : relative ;
+    font-size : 3rem ;
+    top : 400px;
+    left : 50%;
+}
+.taillecheckbox
+{
+    width : 80px;
+    height : 50px;
+    font-size : 2rem;
+}
+    .choixabonnement
+{
+    display:flex;
+    position : absolute;
+    top : 1800px;
+    left: 50px;
+    align-items: center;
+    font-size : 3em;
+    
+}
+.totalpanier
+{
+    display: flex;
+    position : absolute ;
+    top : 1650px;
+    right : 1px;
+    width : 700px;
+font-size : 2.5rem;
+}
+
+.colonne3
+{
+    display : flex;
+    position :absolute;
+    justify-content:space-between ;
+    height : 600px;
+    width : 100%;
+    left : 0px;
+    top : 1900px ;
+    font-size : 2.2em;
+    
+}
+.imgpanier1,.imgpanier2,.imgpanier3
+{
+    display : flex;
+    width: 100%;
+    border : solid green;
+    justify-content:space-around ;
+}
+.colonne4
+{
+    display : flex;
+    position : absolute;
+    left : 75%;
+    top : 1140px;
+    width: auto;
+    height : 460px;
+    flex-direction: column;
+    font-size : 1.3em;
+}
+
+
+.pub
+{
+    display : flex;
+    visibility : hidden;
+    position : absolute;
+    top : 0;
+    left : 0;
+    border: solid black;
+    height : 0;
+    width : 0;
+}
+

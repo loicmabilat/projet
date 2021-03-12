@@ -1,0 +1,16 @@
+body
+{
+    display : flex;
+    
+    justify-content: center;
+    flex-direction : column;
+    font-size : 2.8rem;
+    margin : 5px;
+    justify-content:space-between ;
+}
+input:hover
+{
+    font-size: 3rem;
+    height : 40px;
+    width : 800px;
+}

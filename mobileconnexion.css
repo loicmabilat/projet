@@ -1,0 +1,95 @@
+
+.connexion
+{
+    display : flex;
+    position : absolute;
+    width :100%;
+    font-size: 2.8em;
+    top: 10%;
+    justify-content:space-around;
+    flex-direction : column;
+    text-align : center;
+    background-color : rgb(255, 255, 255);
+    
+}
+.mail
+{
+  background-color :rgb(231, 231, 231);
+  color :rgb(9,117,36) ;
+  border : solid rgb(9, 117, 36) ;
+  border-radius :50px;
+  height:80px;font-size:2.0em;
+}
+.password
+{
+  background-color :rgb(231, 231, 231);
+  color :rgb(9,117,36) ;
+  border : solid rgb(9, 117, 36) ;
+  height:80px;
+}
+.submit {
+    display : flex;
+    left : 15%;
+    top : 2px;
+    width : 70%;
+    position : relative;
+  background-color: rgba(1, 28, 55, 0);
+  border: 4px solid #ddd01cb7;
+  border-radius: 5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align:center;
+  flex-direction :column;
+  overflow: hidden;
+  padding: 1.85rem 3rem;
+  transition: transform 200ms, background-color 200ms;
+  transition-delay: 0, 100ms;
+    align-items :center;
+    justify-content : center;
+    background-color : cadetblue;
+    height:80px;font-size:2.0em;
+}
+
+.submit:hover {
+  transform: scale(1);
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+.recup
+{
+  display : flex;
+  position : relative;
+  
+  justify-content: center;
+  border : solid rgb(0, 0, 0);
+  border-radius : 0px;
+  flex-direction :column;
+  text-align : center;
+  height:60px;
+  font-size:1.2em;
+  width : 80%;
+  top : 150px;
+  left : 10%;
+  background-color: #72b8ff;
+  color : rgb(100, 0, 0);
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style :oblique;
+  text-shadow: rgb(0, 0, 0) 0px 0px 0px;
+}
+b{
+  color : rgb(0, 0, 0);
+}
+
+h1{
+  color :rgb(9,117,36) ;
+  text-decoration-line: underline;
+}
+
+a{
+    text-decoration : none;
+}
+.retour
+{
+    
+    font-size : 4rem;
+}

@@ -1,0 +1,14 @@
+.resume
+{
+    display : flex ;
+    position : relative;
+    flex-direction : column ;
+    border: 2mm ridge blue ;
+    align-items: center ;
+    font-size : 3rem;
+    background-color : white;
+}
+body
+{
+    background-color: #fdf257;
+}

@@ -1,0 +1,48 @@
+<?php
+session_start();
+$bdd = new PDO('mysql:host=localhost;dbname=membres;charset=utf8', 'root', 'root');
+
+if(isset('entrer'))
+{
+    $mdp = sha1($_POST['newmdp']);
+    $confirmdp = sha1($_POST['newconfirmdp']);
+    if($mdp == $confirmdp)
+    {
+            $insertmdp = $bdd->prepare("UPDATE users FROM mdp = ? WHERE id = ?");
+            $insertmdp->execute(array($mdp, $_SESSION['id']));
+            echo "mis à jour";
+    }
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset = "utf-8" >
+    <link rel="stylesheet" href="recup.css">
+    <link rel="stylesheet" media="screen and (max-width:1000px)"
+        href="mobilerecup.css"/>
+        <title>Editonmotdepasse</title>
+    </head>
+
+<body>
+    <div class="container">
+        <h2>edition de votre mot de passe</h2>
+        <form method="POST" action="">
+        
+        <label>nouveau mot de passe :</label>
+        <input type="password" name="newmdp" placeholder="mdp" /><br /><br />
+        <label>confirmé le nouveau mot de passse:</label>
+        <input type="password" name="newconfirmdp" placeholder="confirmdp" /><br /><br />
+        <input type="submit" value="entrer" />
+        </form>
+        <br /><br />
+        <?php if(isset($msg)) {echo $msg; } ?>
+        <div class="retour">
+        <a href="index.php">retour à l'accueil</a>
+        </div>
+</div>
+</body>
+</html>
+<?php
+}
+?>

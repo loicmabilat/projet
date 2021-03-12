@@ -1,25 +1,16 @@
 <?php
 session_start();
-if( !isset($_SESSION['loic']) || !$_SESSION['loic']){
-header('Location: connexion.php');}
+
 $bdd = new PDO('mysql:host=localhost;dbname=membres;charset=utf8', 'root', 'root');
 
 
 
 if(isset($_POST['ajouter']))
 {
-    $getid = intval($_SESSION['id']);
-    $requser = $bdd->prepare('SELECT * FROM users WHERE id =? ');
-    $requser->execute(array($getid));
-    $userinfo = $requser->fetch();
-
     $ch=$_POST["ch"];
     $valider=$_POST['ajouter'];
-    $insertpanier=$bdd->prepare("INSERT INTO panier(composition, id_users) VALUE(?, ?)");
-    $insertpanier->execute(array(implode("|",$ch), $getid));
-    $panierinfo = $insertpanier->fetch();
-
-    
+    $insertpanier=$bdd->prepare("INSERT INTO panier(composition) VALUE(?)");
+    $insertpanier->execute(array(implode("|",$ch)));
 }
 ?>
 <!DOCTYPE html>
@@ -33,8 +24,7 @@ if(isset($_POST['ajouter']))
 
 <body>
 <div class="retour">
-    <a href="index.php">retour à l'accueil</a><br />
-    Profil de : <?php echo $_SESSION['nom']?>
+    <a href="index.php">retour à l'accueil</a>
 </div>
 
 <div class="colonne">
@@ -58,16 +48,16 @@ if(isset($_POST['ajouter']))
 
     <div class="colonne2">
         <div class="choix">
-            choix d'un seul panier, </br>petit ou grand
+            choix des paniers </br>petit ou grand
         </div>
         
         <div class="nombrepanier1">
             <form method="post" action="">
                 <p>
                 <label for="panier1"></label></br>
-                Grand<input type="checkbox" name="ch[]" value="grand panier 1"/>
-                Petit<input type="checkbox" name="ch[]" value="petitpanier1"/>
-                <input type="submit" name="ajouter" value="ajouter" />
+                Grand<input type="checkbox" name="ch[]" value="grand panier 1" class="taillecheckbox" />
+                Petit<input type="checkbox" name="ch[]" value="petitpanier1" class="taillecheckbox"/>
+                <input type="submit" name="ajouter" value="ajouter" class="taillecheckbox"/>
                 </p>
             </form>
         </div>
@@ -76,9 +66,9 @@ if(isset($_POST['ajouter']))
         <form method="post" action="">
             <p>
                 <label for="panier2"></label></br>
-                Grand<input type="checkbox" name="ch[]" value="grand panier 2"  />
-                Petit<input type="checkbox" name="ch[]" value="petit panier 2"  />
-                <input type="submit" name="ajouter" value="ajouter" />
+                Grand<input type="checkbox" name="ch[]" value="grand panier 2" class="taillecheckbox" />
+                Petit<input type="checkbox" name="ch[]" value="petit panier 2" class="taillecheckbox" />
+                <input type="submit" name="ajouter" value="ajouter" class="taillecheckbox"/>
             </p>
         </form>
         </div>
@@ -87,15 +77,15 @@ if(isset($_POST['ajouter']))
         <form method="post" action="">
             <p>
                     <label for="panier3" class="panier3"></label></br>
-                    Grand<input type="checkbox" name="ch[]" value="grand panier 3"  />
-                    Petit<input type="checkbox" name="ch[]" value="petit panier 3"  />
-                    <input type="submit" name="ajouter" value="ajouter" />
+                    Grand<input type="checkbox" name="ch[]" value="grand panier 3" class="taillecheckbox" />
+                    Petit<input type="checkbox" name="ch[]" value="petit panier 3" class="taillecheckbox" />
+                    <input type="submit" name="ajouter" value="ajouter" class="taillecheckbox"/>
             </p>
         </form>
         </div>
 
         <div class="totalpanier">
-            <a>le panier que '</a></br><a>-' vous avez choisie : </a>
+            <a>nombre de panier total 1 maximum '-' vous avez choisie : </a>
             <?php   
         
         if(isset($valider))
@@ -110,7 +100,7 @@ if(isset($_POST['ajouter']))
 
     <div class="colonne3">
         <div class="imagepanier1">
-        panier 1: poireau - radis - courgette - betterave - tomate - oignon - ail
+        panier 1:poireau - radis - courgette - betterave - tomate - oignon - ail
             
             <div class="imgpanier1"> 
             <img src="image\ppoireau.jpg">
@@ -124,7 +114,7 @@ if(isset($_POST['ajouter']))
         </div>
 
         <div class="imagepanier2">
-                panier 2: pomme de terre blanche et rouge - carotte - oignon - ail 
+                panier 2:pomme de terre blanche et rouge - carotte - oignon - ail 
                 
                 <div class="imgpanier2">
                 <img src="image\ppommedtblanche.jpg">
@@ -136,7 +126,7 @@ if(isset($_POST['ajouter']))
         </div>
 
         <div class="imagepanier3">
-            panier 3: pomme blanche - pomme rouge - poire- brugnon ou pêche
+            panier 3:pomme blanche - pomme rouge - poire- brugnon ou pêche
                 
             <div class="imgpanier3">
                 <img src="image\ppommeblanche.jpg">
@@ -167,8 +157,8 @@ if(isset($_POST['ajouter']))
 </div>
     <div class="choixabonnement">
     
-        <a href="abonnement.php">choix de l'adresse de
-        l'abonnement annuel dans abonnement
+        <a href="abonnement.php">choix de
+        l'abonnement après inscription
         </a>
     </div>
     

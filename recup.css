@@ -1,0 +1,16 @@
+body
+{
+    background-color: #fdf257;
+    
+}
+
+.container
+{
+    display : flex;
+    align-items: center ;
+    flex-direction : column;
+    border : 1rem solid green;
+    border-radius : 2rem;
+    margin : 100px;
+    background-color: #fdfbff;
+}

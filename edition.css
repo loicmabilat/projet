@@ -1,0 +1,25 @@
+body
+{
+    display : flex;
+    
+    align-items: center;
+    justify-content: center;
+    flex-direction : column;
+    font-size : 1.5rem;
+    cursor : pointer;
+    background-color:#fbfae6;
+    border : 2mm ridge blue;
+}
+input
+{
+    font-size: 1.5rem;
+    
+}
+.menu
+{
+    
+    background-color : white;
+}
+a{
+    text-decoration : none;
+}
